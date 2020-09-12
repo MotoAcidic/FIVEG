@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=FIVEG Core
+Comment=FIVEG P2P Cryptocurrency
+Comment[fr]=FIVEG, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=FIVEG, eşten eşe kriptografik sanal para birimi
+Exec=fiveg-qt %u
+Terminal=false
+Type=Application
+Icon=fiveg128
+MimeType=x-scheme-handler/fiveg;
+Categories=Office;Finance;
+StartupWMClass=FIVEG-qt

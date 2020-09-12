@@ -1,0 +1,6 @@
+usr/local/bin/fiveg-qt usr/bin
+share/pixmaps/fiveg32.xpm usr/share/pixmaps
+share/pixmaps/fiveg16.xpm usr/share/pixmaps
+share/pixmaps/fiveg128.png usr/share/pixmaps
+debian/fiveg-qt.desktop usr/share/applications
+debian/fiveg-qt.protocol usr/share/kde4/services/

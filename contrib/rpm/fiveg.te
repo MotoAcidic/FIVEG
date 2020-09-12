@@ -1,0 +1,81 @@
+policy_module(fiveg, 1.100.1)
+
+########################################
+#
+# Declarations
+#
+
+type fiveg_t;
+type fiveg_exec_t;
+init_daemon_domain(fiveg_t, fiveg_exec_t)
+
+permissive fiveg_t;
+
+type fiveg_initrc_exec_t;
+init_script_file(fiveg_initrc_exec_t)
+
+type fiveg_conf_t;
+files_type(fiveg_conf_t)
+
+type fiveg_var_lib_t;
+files_type(fiveg_var_lib_t)
+
+type fiveg_var_run_t;
+files_type(fiveg_var_run_t)
+
+type fiveg_port_t;
+corenet_port(fiveg_port_t)
+
+########################################
+#
+# fiveg local policy
+#
+allow fiveg_t self:process { fork };
+
+allow fiveg_t self:fifo_file rw_fifo_file_perms;
+allow fiveg_t self:unix_stream_socket create_stream_socket_perms;
+
+manage_dirs_pattern(fiveg_t, fiveg_conf_t, fiveg_conf_t)
+manage_files_pattern(fiveg_t, fiveg_conf_t, fiveg_conf_t)
+
+manage_dirs_pattern(fiveg_t, fiveg_var_lib_t, fiveg_var_lib_t)
+manage_files_pattern(fiveg_t, fiveg_var_lib_t, fiveg_var_lib_t)
+files_var_lib_filetrans(fiveg_t, fiveg_var_lib_t, { dir file })
+
+manage_dirs_pattern(fiveg_t, fiveg_var_run_t, fiveg_var_run_t)
+manage_files_pattern(fiveg_t, fiveg_var_run_t, fiveg_var_run_t)
+
+sysnet_dns_name_resolve(fiveg_t)
+corenet_all_recvfrom_unlabeled(fiveg_t)
+
+allow fiveg_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_generic_if(fiveg_t)
+corenet_tcp_sendrecv_generic_node(fiveg_t)
+corenet_tcp_sendrecv_all_ports(fiveg_t)
+corenet_tcp_bind_generic_node(fiveg_t)
+
+gen_require(`
+    type fiveg_port_t;
+')
+allow fiveg_t fiveg_port_t:tcp_socket name_bind;
+
+gen_require(`
+    type fiveg_port_t;
+')
+allow fiveg_t fiveg_port_t:tcp_socket name_connect;
+
+domain_use_interactive_fds(fiveg_t)
+
+files_read_etc_files(fiveg_t)
+
+miscfiles_read_localization(fiveg_t)
+
+sysnet_dns_name_resolve(fiveg_t)
+
+allow fiveg_t fiveg_exec_t:file execute_no_trans;
+allow fiveg_t self:process setsched;
+corecmd_exec_ls(fiveg_t)
+corenet_tcp_connect_http_port(fiveg_t)
+dev_read_urand(fiveg_t)
+fs_getattr_xattr_fs(fiveg_t)
+kernel_read_system_state(fiveg_t)

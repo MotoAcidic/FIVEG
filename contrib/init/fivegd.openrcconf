@@ -1,0 +1,33 @@
+# /etc/conf.d/fivegd: config file for /etc/init.d/fivegd
+
+# Config file location
+#BITCOIND_CONFIGFILE="/etc/fiveg/fiveg.conf"
+
+# What directory to write pidfile to?  (created and owned by $BITCOIND_USER)
+#BITCOIND_PIDDIR="/var/run/fivegd"
+
+# What filename to give the pidfile
+#BITCOIND_PIDFILE="${BITCOIND_PIDDIR}/fivegd.pid"
+
+# Where to write fivegd data (be mindful that the blockchain is large)
+#BITCOIND_DATADIR="/var/lib/fivegd"
+
+# User and group to own fivegd process
+#BITCOIND_USER="fiveg"
+#BITCOIND_GROUP="fiveg"
+
+# Path to fivegd executable
+#BITCOIND_BIN="/usr/bin/fivegd"
+
+# Nice value to run fivegd under
+#BITCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+#BITCOIND_OPTS=""
+
+# The timeout in seconds OpenRC will wait for bitcoind to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+BITCOIND_SIGTERM_TIMEOUT=60

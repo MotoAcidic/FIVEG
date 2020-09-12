@@ -1,0 +1,8 @@
+/usr/bin/fiveg-cli		--	gen_context(system_u:object_r:fiveg_exec_t,s0)
+/usr/sbin/fivegd		--	gen_context(system_u:object_r:fiveg_exec_t,s0)
+/usr/lib(64)?/fiveg/fivegd		--	gen_context(system_u:object_r:fiveg_exec_t,s0)
+
+/etc/fiveg(/.*)?		gen_context(system_u:object_r:fiveg_conf_t,s0)
+/var/lib/fiveg(/.*)?		gen_context(system_u:object_r:fiveg_var_lib_t,s0)
+
+(/var)?/run/fivegd(/.*)?   gen_context(system_u:object_r:fiveg_var_run_t,s0)

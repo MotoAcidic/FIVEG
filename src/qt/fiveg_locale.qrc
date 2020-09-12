@@ -1,0 +1,37 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="bg">locale/fiveg_bg.qm</file>
+        <file alias="ca">locale/fiveg_ca.qm</file>
+        <file alias="cs">locale/fiveg_cs.qm</file>
+        <file alias="da">locale/fiveg_da.qm</file>
+        <file alias="de">locale/fiveg_de.qm</file>
+        <file alias="en">locale/fiveg_en.qm</file>
+        <file alias="en_GB">locale/fiveg_en_GB.qm</file>
+        <file alias="en_US">locale/fiveg_en_US.qm</file>
+        <file alias="eo">locale/fiveg_eo.qm</file>
+        <file alias="es">locale/fiveg_es.qm</file>
+        <file alias="es_ES">locale/fiveg_es_ES.qm</file>
+        <file alias="fi">locale/fiveg_fi.qm</file>
+        <file alias="fr_FR">locale/fiveg_fr_FR.qm</file>
+        <file alias="hi_IN">locale/fiveg_hi_IN.qm</file>
+        <file alias="hr">locale/fiveg_hr.qm</file>
+        <file alias="hr_HR">locale/fiveg_hr_HR.qm</file>
+        <file alias="it">locale/fiveg_it.qm</file>
+        <file alias="ja">locale/fiveg_ja.qm</file>
+        <file alias="ko_KR">locale/fiveg_ko_KR.qm</file>
+        <file alias="lt_LT">locale/fiveg_lt_LT.qm</file>
+        <file alias="nl">locale/fiveg_nl.qm</file>
+        <file alias="pl">locale/fiveg_pl.qm</file>
+        <file alias="pt">locale/fiveg_pt.qm</file>
+        <file alias="pt_BR">locale/fiveg_pt_BR.qm</file>
+        <file alias="ro_RO">locale/fiveg_ro_RO.qm</file>
+        <file alias="ru">locale/fiveg_ru.qm</file>
+        <file alias="sk">locale/fiveg_sk.qm</file>
+        <file alias="sv">locale/fiveg_sv.qm</file>
+        <file alias="tr">locale/fiveg_tr.qm</file>
+        <file alias="uk">locale/fiveg_uk.qm</file>
+        <file alias="vi">locale/fiveg_vi.qm</file>
+        <file alias="zh_CN">locale/fiveg_zh_CN.qm</file>
+        <file alias="zh_TW">locale/fiveg_zh_TW.qm</file>
+    </qresource>
+</RCC>
