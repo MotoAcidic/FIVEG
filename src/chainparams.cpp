@@ -143,7 +143,7 @@ public:
         nBlockDoubleAccumulated = 999999999;
         nMasternodeCollateralAmt = 10000;
         nMasternodeCollateralAmtNew = 200;
-        nMinStakeInput = 25 * COIN;
+        nStakeInput = 25 * COIN;
         nEnforceNewSporkKey = 1599440115;
         nRejectOldSporkKey = 1527811200; 
 
