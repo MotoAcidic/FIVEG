@@ -129,6 +129,13 @@ public:
     int Block_Enforce_Invalid() const { return nBlockEnforceInvalidUTXO; }
     int Zerocoin_Block_V2_Start() const { return nBlockZerocoinV2; }
 
+    //Central Collateral Amount
+    int MasternodeCollateralAmt() const { return nMasternodeCollateralAmt; }
+    int MasternodeCollateralAmtNew() const { return nMasternodeCollateralAmtNew; }
+
+    //Min stake input
+    CAmount StakeInput() const { return nStakeInput; }
+
     // fake serial attack
     int Zerocoin_Block_EndFakeSerial() const { return nFakeSerialBlockheightEnd; }
     CAmount GetSupplyBeforeFakeSerial() const { return nSupplyBeforeFakeSerial; }
@@ -146,6 +153,9 @@ protected:
     //! Raw pub key bytes for the broadcast alert signing key.
     std::vector<unsigned char> vAlertPubKey;
     int nDefaultPort;
+    int nMasternodeCollateralAmt;
+    int nMasternodeCollateralAmtNew;
+    CAmount nStakeInput;
     uint256 bnProofOfWorkLimit;
     int nMaxReorganizationDepth;
     int nSubsidyHalvingInterval;

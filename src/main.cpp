@@ -1955,6 +1955,14 @@ bool ReadBlockFromDisk(CBlock& block, const CDiskBlockPos& pos)
     return true;
 }
 
+CAmount GetCurrentCollateral()
+{
+    if (ActiveProtocol() >= COLLATERAL_FORK_VERSION)
+        return Params().MasternodeCollateralAmtNew();
+    else
+        return Params().MasternodeCollateralAmt();
+}
+
 bool ReadBlockFromDisk(CBlock& block, const CBlockIndex* pindex)
 {
     if (!ReadBlockFromDisk(block, pindex->GetBlockPos()))
@@ -1989,14 +1997,10 @@ double ConvertBitsToDouble(unsigned int nBits)
 int64_t GetBlockValue(int nHeight)
 {
     int64_t nSubsidy = 0;
-    
     if (nHeight == 0) {
      nSubsidy = 1300000 * COIN;
     }
-    else if (nHeight <= Params().LAST_POW_BLOCK() && nHeight > 0) {
-     nSubsidy = 3 * COIN;
-    }
-    else if (nHeight > Params().LAST_POW_BLOCK()) {
+    else if (nHeight > 0) {
      nSubsidy = 3 * COIN;
     }
     
@@ -2014,7 +2018,7 @@ CAmount GetSeeSaw(const CAmount& blockValue, int nMasternodeCount, int nHeight)
     }
 
     int64_t nMoneySupply = chainActive.Tip()->nMoneySupply;
-    int64_t mNodeCoins = nMasternodeCount * 10000 * COIN;
+    int64_t mNodeCoins = nMasternodeCount * GetCurrentCollateral();
 
     // Use this log to compare the masternode count for different clients
     //LogPrintf("Adjusting seesaw at height %d with %d masternodes (without drift: %d) at %ld\n", nHeight, nMasternodeCount, nMasternodeCount - Params().MasternodeCountDrift(), GetTime());
@@ -2036,7 +2040,11 @@ int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCou
             return 0;
     }
 
-    ret = blockValue * 0.45;
+    if (nHeight == 0) {
+        ret = blockValue * 0;
+    } else if (nHeight > 0) {
+        ret = blockValue * 0.45;
+    }     
     
     return ret;
 }
@@ -4134,6 +4142,22 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
         for (unsigned int i = 2; i < block.vtx.size(); i++)
             if (block.vtx[i].IsCoinStake())
                 return state.DoS(100, error("CheckBlock() : more than one coinstake"));
+    }
+
+    //check for minimal stake input after fork
+    CBlockIndex* pindex = NULL;
+    CTransaction txPrev;
+    uint256 hashBlockPrev = block.hashPrevBlock;
+    BlockMap::iterator it = mapBlockIndex.find(hashBlockPrev);
+    if (it != mapBlockIndex.end())
+        pindex = it->second;
+    else
+        return state.DoS(100, error("CheckBlock() : stake failed to find block index"));
+    if (ActiveProtocol > MIN_STAKE_INPUT_VERSION) {
+        if (!GetTransaction(block.vtx[1].vin[0].prevout.hash, txPrev, hashBlockPrev, true))
+            return state.DoS(100, error("CheckBlock() : stake failed to find vin transaction"));
+        if (txPrev.vout[block.vtx[1].vin[0].prevout.n].nValue < Params().StakeInput())
+            return state.DoS(100, error("CheckBlock() : stake input below minimum value"));
     }
 
     // ----------- swiftTX transaction scanning -----------
@@ -6820,11 +6844,10 @@ int ActiveProtocol()
     //if (IsSporkActive(SPORK_14_NEW_PROTOCOL_ENFORCEMENT))
     //        return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
 
-    // SPORK_15 is used for 70916 (v3.3+)
-    if (IsSporkActive(SPORK_15_NEW_PROTOCOL_ENFORCEMENT_2))
-            return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
-
-    return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
+    if (chainActive.Height() >= V1_FORK_HEIGHT)
+        return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
+    else
+        return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
 }
 
 // requires LOCK(cs_vRecvMsg)
