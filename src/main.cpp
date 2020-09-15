@@ -4153,7 +4153,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
         pindex = it->second;
     else
         return state.DoS(100, error("CheckBlock() : stake failed to find block index"));
-    if (ActiveProtocol > MIN_STAKE_INPUT_VERSION) {
+    if (pindex->nHeight > V1_FORK_HEIGHT) {
         if (!GetTransaction(block.vtx[1].vin[0].prevout.hash, txPrev, hashBlockPrev, true))
             return state.DoS(100, error("CheckBlock() : stake failed to find vin transaction"));
         if (txPrev.vout[block.vtx[1].vin[0].prevout.n].nValue < Params().StakeInput())
