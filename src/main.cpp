@@ -4149,7 +4149,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
     CTransaction txPrev;
     uint256 hashBlockPrev = block.hashPrevBlock;
     BlockMap::iterator it = mapBlockIndex.find(hashBlockPrev);
-    if (it != mapBlockIndex.end())
+    if (it != mapBlockIndex.end() || pindex->nHeight <= Params().LAST_POW_BLOCK())
         pindex = it->second;
     else
         return state.DoS(100, error("CheckBlock() : stake failed to find block index"));
