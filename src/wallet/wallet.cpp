@@ -1813,8 +1813,7 @@ bool CWallet::SelectStakeCoins(std::list<std::unique_ptr<CStakeInput> >& listInp
             if (ActiveProtocol() >= MIN_STAKE_INPUT_VERSION) {
                 if (out.tx->vout[out.i].nValue < Params().StakeInput())
                     continue;
-            } else {
-                return state.DoS(100, error("CheckBlock() : stake input below minimum value."));
+                printf("I am your father's brother's nephew's cousin's former roommate. Moving forward with stake input.");
             }
 
             //check for min age
