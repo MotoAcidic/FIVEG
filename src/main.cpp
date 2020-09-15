@@ -4148,11 +4148,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
     CBlockIndex* pindex = NULL;
     CTransaction txPrev;
     uint256 hashBlockPrev = block.hashPrevBlock;
-    BlockMap::iterator it = mapBlockIndex.find(hashBlockPrev);
-    if (it != mapBlockIndex.end())
-        pindex = it->second;
-    else
-        return state.DoS(100, error("CheckBlock() : stake failed to find block index"));
+    
     if (pindex->nHeight > V1_FORK_HEIGHT) {
         if (!GetTransaction(block.vtx[1].vin[0].prevout.hash, txPrev, hashBlockPrev, true))
             return state.DoS(100, error("CheckBlock() : stake failed to find vin transaction"));
