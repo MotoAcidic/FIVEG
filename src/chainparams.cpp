@@ -53,7 +53,7 @@ static void convertSeed6(std::vector<CAddress>& vSeedsOut, const SeedSpec6* data
 // + Contains no strange transactions
 static Checkpoints::MapCheckpoints mapCheckpoints =
     boost::assign::map_list_of
-    (0, uint256("00000f8ab9b152b986a8ff3f5fe7734c7f139360951814981d1e7d502319d6c7"));
+    (0, uint256("0x00000f8ab9b152b986a8ff3f5fe7734c7f139360951814981d1e7d502319d6c7"));
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
     1599440115, // * UNIX timestamp of last checkpoint block
@@ -141,6 +141,9 @@ public:
         nInvalidAmountFiltered = 0; //Amount of invalid coins filtered through exchanges, that should be considered valid
         nBlockZerocoinV2 = 999999999;
         nBlockDoubleAccumulated = 999999999;
+        nMasternodeCollateralAmt = 10000;
+        nMasternodeCollateralAmt2 = 500;
+        nMasternodeCollateralAmt3 = 1000;
         nEnforceNewSporkKey = 1599440115;
         nRejectOldSporkKey = 1527811200; 
 
