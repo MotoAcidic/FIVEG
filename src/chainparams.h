@@ -131,7 +131,8 @@ public:
 
     //Central Collateral Amount
     int MasternodeCollateralAmt() const { return nMasternodeCollateralAmt; }
-    int MasternodeCollateralAmtNew() const { return nMasternodeCollateralAmtNew; }
+    int MasternodeCollateralAmt2() const { return nMasternodeCollateralAmt2; }
+    int MasternodeCollateralAmt3() const { return nMasternodeCollateralAmt3; }
 
     // fake serial attack
     int Zerocoin_Block_EndFakeSerial() const { return nFakeSerialBlockheightEnd; }
@@ -151,7 +152,8 @@ protected:
     std::vector<unsigned char> vAlertPubKey;
     int nDefaultPort;
     int nMasternodeCollateralAmt;
-    int nMasternodeCollateralAmtNew;
+    int nMasternodeCollateralAmt2;
+    int nMasternodeCollateralAmt3;
     uint256 bnProofOfWorkLimit;
     int nMaxReorganizationDepth;
     int nSubsidyHalvingInterval;

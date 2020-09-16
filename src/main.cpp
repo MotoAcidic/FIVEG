@@ -1958,7 +1958,9 @@ bool ReadBlockFromDisk(CBlock& block, const CDiskBlockPos& pos)
 CAmount GetCurrentCollateral()
 {
     if (ActiveProtocol() >= COLLATERAL_FORK_VERSION && chainActive.Height() >= V1_FORK_HEIGHT)
-        return Params().MasternodeCollateralAmtNew();
+        return Params().MasternodeCollateralAmt2();
+    else if (ActiveProtocol() >= COLLATERAL_FORK_VERSION && chainActive.Height() >= V1_FORK_HEIGHT && IsSporkActive(SPORK_17_COLLATERAL_CHANGE))
+        return Params().MasternodeCollateralAmt3();
     else
         return Params().MasternodeCollateralAmt();
 }

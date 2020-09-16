@@ -30,7 +30,7 @@ static const int COLLATERAL_FORK_VERSION = 70917;
 static const int MIN_STAKE_INPUT_VERSION = 70917;
 
 //! Collateral / Stake fork height
-static const int V1_FORK_HEIGHT = 1500;
+static const int V1_FORK_HEIGHT = 2500;
 
 //! masternodes older than this proto version use old strMessage format for mnannounce
 static const int MIN_PEER_MNANNOUNCE = 70913;

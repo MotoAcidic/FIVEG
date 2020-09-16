@@ -142,7 +142,8 @@ public:
         nBlockZerocoinV2 = 999999999;
         nBlockDoubleAccumulated = 999999999;
         nMasternodeCollateralAmt = 10000;
-        nMasternodeCollateralAmtNew = 200;
+        nMasternodeCollateralAmt2 = 500;
+        nMasternodeCollateralAmt3 = 1000;
         nEnforceNewSporkKey = 1599440115;
         nRejectOldSporkKey = 1527811200; 
 
