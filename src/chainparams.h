@@ -133,9 +133,6 @@ public:
     int MasternodeCollateralAmt() const { return nMasternodeCollateralAmt; }
     int MasternodeCollateralAmtNew() const { return nMasternodeCollateralAmtNew; }
 
-    //Min stake input
-    CAmount StakeInput() const { return nStakeInput; }
-
     // fake serial attack
     int Zerocoin_Block_EndFakeSerial() const { return nFakeSerialBlockheightEnd; }
     CAmount GetSupplyBeforeFakeSerial() const { return nSupplyBeforeFakeSerial; }
@@ -155,7 +152,6 @@ protected:
     int nDefaultPort;
     int nMasternodeCollateralAmt;
     int nMasternodeCollateralAmtNew;
-    CAmount nStakeInput;
     uint256 bnProofOfWorkLimit;
     int nMaxReorganizationDepth;
     int nSubsidyHalvingInterval;

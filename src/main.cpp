@@ -6828,7 +6828,7 @@ int ActiveProtocol()
     //if (IsSporkActive(SPORK_14_NEW_PROTOCOL_ENFORCEMENT))
     //        return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
 
-    if (chainActive.Height() >= V1_FORK_HEIGHT)
+    if (chainActive.Height() >= 10000000)
         return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
     else
         return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
