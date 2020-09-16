@@ -1809,13 +1809,6 @@ bool CWallet::SelectStakeCoins(std::list<std::unique_ptr<CStakeInput> >& listInp
                 nTxTime = mapBlockIndex.at(out.tx->hashBlock)->GetBlockTime();
             }
 
-            //check for minimal stake input after fork
-            if (ActiveProtocol() >= MIN_STAKE_INPUT_VERSION) {
-                if (out.tx->vout[out.i].nValue < Params().StakeInput())
-                    continue;
-                printf("I am your father's brother's nephew's cousin's former roommate. Moving forward with stake input.");
-            }
-
             //check for min age
             if ((GetAdjustedTime() - nTxTime < nStakeMinAge ) && Params().NetworkID() != CBaseChainParams::REGTEST)
                 continue;

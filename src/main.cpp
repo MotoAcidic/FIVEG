@@ -4144,22 +4144,6 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
                 return state.DoS(100, error("CheckBlock() : more than one coinstake"));
     }
 
-    //check for minimal stake input after fork
-    CBlockIndex* pindex = NULL;
-    CTransaction txPrev;
-    uint256 hashBlockPrev = block.hashPrevBlock;
-    BlockMap::iterator it = mapBlockIndex.find(hashBlockPrev);
-    if (it != mapBlockIndex.end() || pindex->nHeight < V1_FORK_HEIGHT)
-        pindex = it->second;
-    else
-        return state.DoS(100, error("CheckBlock() : stake failed to find block index"));
-    if (pindex->nHeight > V1_FORK_HEIGHT) {
-        if (!GetTransaction(block.vtx[1].vin[0].prevout.hash, txPrev, hashBlockPrev, true))
-            return state.DoS(100, error("CheckBlock() : stake failed to find vin transaction"));
-        if (txPrev.vout[block.vtx[1].vin[0].prevout.n].nValue < Params().StakeInput())
-            return state.DoS(100, error("CheckBlock() : stake input below minimum value"));
-    }
-
     // ----------- swiftTX transaction scanning -----------
     if (IsSporkActive(SPORK_3_SWIFTTX_BLOCK_FILTERING)) {
         for (const CTransaction& tx : block.vtx) {
