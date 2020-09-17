@@ -26,8 +26,8 @@ static const int MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT = 70917;
 //! New Collateral
 static const int COLLATERAL_FORK_VERSION = 70917;
 
-//! Min Stake Version
-static const int MIN_STAKE_INPUT_VERSION = 70917;
+//! ALGO FIX
+static const int ALGO_CORRECTION = 70917;
 
 //! Collateral / Stake fork height
 static const int V1_FORK_HEIGHT = 2500;
