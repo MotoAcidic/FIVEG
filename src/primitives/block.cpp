@@ -13,13 +13,21 @@
 #include "utilstrencodings.h"
 #include "util.h"
 
+#define BEGIN(a) ((char*)&(a))
+#define END(a) ((char*)&((&(a))[1]))
+
 uint256 CBlockHeader::GetHash() const
+{
+    return SerializeHash(*this);
+}
+
+uint256 CBlockHeader::GetPoWHash() const
 {
     if (nVersion < 4)
         return HashQuark(BEGIN(nVersion), END(nNonce));
     else if (nVersion == 5)
         return Hash(BEGIN(nVersion), END(nAccumulatorCheckpoint));
-    else 
+    else
         return HashQuark(BEGIN(nVersion), END(nNonce));
 }
 
